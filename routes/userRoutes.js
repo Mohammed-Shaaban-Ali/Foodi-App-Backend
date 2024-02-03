@@ -12,6 +12,7 @@ const verifyAdmin = require("../middlewares/verifyAdmin");
 const verifyToken = require("../middlewares/verifyToken");
 
 router.route("/").get(verifyToken, verifyAdmin, getAllUsers).post(createUser);
+// router.route("/").get(getAllUsers).post(createUser);
 router.delete("/:id", verifyToken, verifyAdmin, deleteUser);
 router.get("/admin/:email", verifyToken, getAdmin);
 router.patch("/admin/:id", verifyToken, verifyAdmin, makeAdmin);

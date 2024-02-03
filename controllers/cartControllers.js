@@ -18,29 +18,29 @@ const getCartByEmail = async (req, res) => {
 
 // post a cart when add-to-cart btn clicked
 const addToCart = async (req, res) => {
-  // const { menuItemId, name, recipe, image, price, quantity, email } = req.body;
-  // // console.log(email)
+  const { menuItemId, name, recipe, image, price, quantity, email } = req.body;
+  // console.log(email)
   try {
-    //   // exiting menu item
-    //   const existingCartItem = await Carts.findOne({ email, menuItemId });
-    //   // console.log(existingCartItem)
-    //   if (existingCartItem) {
-    //     return res
-    //       .status(400)
-    //       .json({ message: "Product already exists in the cart!" });
-    //   }
+    // exiting menu item
+    const existingCartItem = await Carts.findOne({ email, menuItemId });
+    // console.log(existingCartItem)
+    if (existingCartItem) {
+      return res
+        .status(400)
+        .json({ message: "Product already exists in the cart!" });
+    }
 
-    //   const cartItem = await Carts.create({
-    //     menuItemId,
-    //     name,
-    //     recipe,
-    //     image,
-    //     price,
-    //     quantity,
-    //     email,
-    //   });
+    const cartItem = await Carts.create({
+      menuItemId,
+      name,
+      recipe,
+      image,
+      price,
+      quantity,
+      email,
+    });
 
-    const cartItem = await Carts.create(req.body);
+    // const cartItem = await Carts.create(req.body);
 
     res.status(201).json(cartItem);
   } catch (error) {
