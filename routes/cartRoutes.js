@@ -10,8 +10,8 @@ const {
 } = require("../controllers/cartControllers");
 const verifyToken = require("../middlewares/verifyToken");
 
-// router.route("/").get(verifyToken, getCartByEmail).post(addToCart);
-router.route("/").get(getCartByEmail).post(addToCart);
+router.route("/").get(verifyToken, getCartByEmail).post(addToCart);
+// router.route("/").get(getCartByEmail).post(addToCart);
 
 router.route("/:id").get(getSingleCart).delete(deleteCart).put(updateCart);
 
