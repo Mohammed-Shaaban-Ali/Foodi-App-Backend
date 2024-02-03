@@ -17,5 +17,17 @@ const createMenu = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+const deleteMenu = async (req, res) => {
+  try {
+    const menu = await Menu.findOneAndDelete({ _id: req.params.id });
 
-module.exports = { getAllMenu, createMenu };
+    if (!menu) {
+      return res.status(401).json({ message: "menu Items not found!" });
+    }
+    res.status(200).json({ message: "menu Item Deleted Successfully!" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getAllMenu, createMenu, deleteMenu };
