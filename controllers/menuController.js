@@ -30,4 +30,33 @@ const deleteMenu = async (req, res) => {
   }
 };
 
-module.exports = { getAllMenu, createMenu, deleteMenu };
+const getMenu = async (req, res) => {
+  try {
+    const menu = await Menu.findById({ _id: req.params.id });
+
+    if (!menu) {
+      return res.status(401).json({ message: "menu Items not found!" });
+    }
+    res.status(200).json(menu);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+const updateMenu = async (req, res) => {
+  try {
+    const menu = await Menu.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $set: req.body },
+      { new: true }
+    );
+
+    if (!menu) {
+      return res.status(401).json({ message: "menu Items not found!" });
+    }
+    res.status(200).json(menu);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getAllMenu, createMenu, deleteMenu, getMenu, updateMenu };
