@@ -10,7 +10,11 @@ const userSchema = new Schema(
       trim: true,
       minlength: 3,
     },
-    photoURL: String,
+    photoURL: {
+      type: String,
+      default:
+        "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg",
+    },
     role: {
       type: String,
       enum: ["user", "admin"],
